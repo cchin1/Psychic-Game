@@ -9,11 +9,15 @@
 8. When the player loses, increase the Losses counter and restart the game without a page refresh (just like when the user wins).
 */
 
-var lettersGuessed = [];
-var guessesLeft = 10;
-var wins = 0;
+//Array of possible computer choices
+var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-
+//Variables for tracking
+var playersGuess = [];
+var computerGuess = [];
+var numGuesses = 10;
+var numWins = 0;
+var losses = 0;
 
 // using Math.random method along with String.fromCharCode method to generate random selection of random letter
 var computerGuess = 
