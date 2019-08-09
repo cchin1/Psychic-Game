@@ -1,5 +1,5 @@
 # Psychic-Game
-For UW Coding Bootcamp HW#4
+For UW Coding Bootcamp HW#3
 
 ## Installation
 

@@ -1,93 +1,71 @@
 //Array of possible computer choices
-var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var letterChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-//Variables for tracking
-var guessSoFar = [];
-var guessLeft = 9;
-var numGuesses = 10;
-var numWins = 0;
+//score
+var wins = 0;
 var losses = 0;
+var guesses = 9;
+var guessesLeft = 9;
+var guessedLetters = [];
+var letterToGuess = null;
 
-//reset all to default and start new game
-function reset (){
-    guessLeft = 9;
-    guessSoFar = [];
-    computerGuess = computerChoice[Math.floor(Math.random()*computerChoice.length)];
-    console.log (computerGuess);
-}
-reset();
+//computer randomly chooses a letter
 
+var computerGuess = letterChoices [Math.floor(Math.random()*letterChoices.length)];
 
+//guesses left function
 
-// function to capture user's keyboard input and make the input lowercase
+var updateGuessesLeft = function() {
+	document.querySelector('#guessLeft').innerHTML = "Guesses Left: " + guessesLeft;
+};
+
+//letter to guess function
+
+var updateletterToGuess = function(){
+	this.letterToGuess = this.letterChoices[Math.floor(Math.random() * this.letterChoices.length)];
+};
+
+var updateGuessesSoFar = function(){
+	document.querySelector('#let').innerHTML = "Your guesses so far: " + guessedLetters.join(', ');
+};
+
+//reset
+
+var reset = function(){
+	totalGuesses = 9;
+	guessesLeft = 9;
+	guessedLetters = [];
+
+	updateletterToGuess();
+	updateGuessesSoFar();
+	updateGuessesLeft();
+
+};
+
+updateGuessesLeft();
+updateletterToGuess();
+
+//user input key
+
 document.onkeyup = function(event) {
-var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+	guessesLeft--;
+	var userGuess = event.key; 
+	
+	guessedLetters.push(userGuess);
+	updateGuessesLeft();
+	updateGuessesSoFar();
 
-    //document.getElementById('guess').innerHTML = keyPress;
-    addLetter(keyPress);
+		if (guessesLeft > 0){
+			if (userGuess === letterToGuess){
+				wins++;
+				document.querySelector('#wins').innerHTML = 'Wins: ' + wins;
+				alert("How did you know!?!");
+				reset();
+			}
+		} else if (guessesLeft == 0){
+			losses++;
+			document.querySelector('#losses').innerHTML = 'Losses: ' + losses;
+			alert("Sorry, you're not a psychic!");
 
-}
-
-//function to catch repeat letter and/or add players guess to lettersGuessed
-function addLetter (usersKeypress) {
-
-    var repeatGuess = lettersGuessed.some(function(item){
-        return item === usersKeypress;
-    })
-
-    //alert player if the above code is true.
-    if (repeatGuess) {
-        alert(usersKeypress + " already guessed. try again");
-
-        //if it is not a repeat guess, check if it's in word
-    } else {
-        lettersGuessed.push(usersKeypress);
-        console.log(lettersGuessed);
-
-        //show user's input in browser
-        showLettersGuessed();
-
-        //is user's input a match to computer guess
-        guessMatch(usersKeypress);
-    }
-
-}
-
-//function to show letters guessed in browser
-function showLettersGuessed() {
-    var tempStr = lettersGuessed.join(", ");
-    document.getElementById("playersGuess".innerHTML = tempStr;
-}
-
-function guessMatch (character) {
-
-    console.log(character);
-    console.log(computerGuess);
-
-    if (character === computerGuess) {
-
-        alert("You win!");
-        wins = wins + 1;
-        showWins();
-
-    } else if (guessesLeft === 0) {
-        
-        alert("Sorry, need to start over.");
-        resetVariables ();
-
-    } else {
-        guessesLeft = guessesLeft - 1;
-        showGuessesRemaining();
-    }   
-}
-
-//function to show wins
-function showWins() {
-        document.getElementById("numWins").innerHTML = wins;
-}
-    
-//function to show guesses remaining
-function showGuessesRemaining() {
-    document.getElementById("numGuesses").innerHTML = guessesLeft;
-}
-
+			reset();
+        }}
