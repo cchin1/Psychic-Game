@@ -1,3 +1,5 @@
+// Check out my portfolio and click on the "Projects/Portfolio" box to exposer details and link to this Psychic Game. https://cchin1.github.io/Bootstrap-Portfolio/
+
 //Array of possible computer choices
 var letterChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
