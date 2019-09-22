@@ -1,5 +1,6 @@
 # Psychic-Game
 For UW Coding Bootcamp HW#3
+https://cchin1.github.io/Psychic-Game/
 
 ## Installation
 
